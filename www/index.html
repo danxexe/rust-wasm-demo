@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rust-wasm-demo</title>
+  </head>
+  <body>
+    <pre id="out"></pre>
+    <script type="module">
+      let out = document.getElementById("out")
+      async function init() {
+        const { instance } = await WebAssembly.instantiateStreaming(
+          fetch("./rust_wasm_demo.wasm")
+        );
+    
+        const answer = instance.exports.the_answer();
+        out.innerText = answer;
+      }
+    
+      init();
+    </script>
+  </body>
+</html>
